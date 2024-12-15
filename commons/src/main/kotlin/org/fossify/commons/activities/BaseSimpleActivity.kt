@@ -635,29 +635,11 @@ abstract class BaseSimpleActivity : AppCompatActivity() {
         }
     }
 
-    fun startCustomizationActivity() {
-        if (!packageName.contains("yfissof".reversed(), true)) {
-            if (baseConfig.appRunCount > 100) {
-                val label = "You are using a fake version of the app. For your own safety download the original one from www.fossify.org. Thanks"
-                ConfirmationDialog(this, label, positive = R.string.ok, negative = 0) {
-                    launchViewIntent(DEVELOPER_PLAY_STORE_URL)
-                }
-                return
-            }
-        }
-
+    fun handleCustomizeColorsClick() {
         Intent(applicationContext, CustomizationActivity::class.java).apply {
             putExtra(APP_ICON_IDS, getAppIconIDs())
             putExtra(APP_LAUNCHER_NAME, getAppLauncherName())
             startActivity(this)
-        }
-    }
-
-    fun handleCustomizeColorsClick() {
-        if (isOrWasThankYouInstalled()) {
-            startCustomizationActivity()
-        } else {
-            FeatureLockedDialog(this) {}
         }
     }
 
